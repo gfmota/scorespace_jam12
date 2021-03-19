@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/staff.png-bfbced8a131f2db124a0deb81dc28c07.stex"
+path="res://.import/blue_energy.png-c3dbdf5a6beeaffdc3d019ea060a4374.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/staff.png"
-dest_files=[ "res://.import/staff.png-bfbced8a131f2db124a0deb81dc28c07.stex" ]
+source_file="res://assets/sprites/blue_energy.png"
+dest_files=[ "res://.import/blue_energy.png-c3dbdf5a6beeaffdc3d019ea060a4374.stex" ]
 
 [params]
 
