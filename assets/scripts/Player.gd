@@ -34,7 +34,7 @@ func _physics_process(delta):
 	
 	speed += direction.normalized() * ACCELERATION * delta
 	speed = speed.clamped(MAX_SPEED)
-	speed = speed * FRICTION
+	speed *= FRICTION
 	move_and_slide(speed)
 	
 	if direction == Vector2.ZERO:
