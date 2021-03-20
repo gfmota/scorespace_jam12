@@ -1,9 +1,13 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://assets/scenes/TileMap.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/scenes/Player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/scripts/Arena.gd" type="Script" id=3]
+[ext_resource path="res://assets/scenes/Shoot.tscn" type="PackedScene" id=4]
 
 [node name="Arena" type="Node2D"]
+script = ExtResource( 3 )
+shoot_scene = ExtResource( 4 )
 
 [node name="Tiles" type="Node2D" parent="."]
 

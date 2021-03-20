@@ -1,10 +1,12 @@
 extends KinematicBody2D
 
+signal shoot_projectile
 const ACCELERATION : int = 1500
 const MAX_SPEED : int = 2500
 const FRICTION : float = 0.9
 onready var casting : bool = false
-onready var act_energy : int = 0
+onready var act_energies : Array = [1, 1, 1]
+onready var ind_energy : int = 0
 onready var energies_node : Node2D = $Energies
 onready var energies : Array = [$Energies/Energy1, $Energies/Energy2, $Energies/Energy3]
 onready var speed : Vector2 = Vector2.ZERO
@@ -48,21 +50,28 @@ func _physics_process(delta):
 
 func _input(event):
 	if event.is_action_pressed("left_mouse") and spell_a_cooldown.is_stopped():
-		# Cast spell A
+		emit_signal("shoot_projectile", act_energies)
 		spell_a_cooldown.start()
 	if event.is_action_pressed("right_mouse") and spell_b_cooldown.is_stopped():
 		#Cast spell B
 		spell_b_cooldown.start()
 	
 	if event.is_action_pressed("green_energy"):
-		energy_manager("green")
+		energy_manager(1)
 	if event.is_action_pressed("blue_energy"):
-		energy_manager("blue")
+		energy_manager(2)
 	if event.is_action_pressed("red_energy"):
-		energy_manager("red")
+		energy_manager(3)
 
 func energy_manager(color):
-	energies[act_energy].play(color)
-	act_energy += 1
-	if act_energy == 3:
-		act_energy = 0
+	act_energies[ind_energy] = color
+	match color:
+		1:
+			energies[ind_energy].play("green")
+		2:
+			energies[ind_energy].play("blue")
+		3:
+			energies[ind_energy].play("red")
+	ind_energy += 1
+	if ind_energy == 3:
+		ind_energy = 0
