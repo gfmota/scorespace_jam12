@@ -10,8 +10,8 @@ onready var ind_energy : int = 0
 onready var energies_node : Node2D = $Energies
 onready var energies : Array = [$Energies/Energy1, $Energies/Energy2, $Energies/Energy3]
 onready var speed : Vector2 = Vector2.ZERO
-onready var spell_a_cooldown : Timer = $CooldownA
-onready var spell_b_cooldown : Timer = $CooldownB
+onready var shoot_cooldown : Timer = $ShootCD
+onready var spell_cooldown : Timer = $SpellCD
 onready var sprite : AnimatedSprite = $Sprite
 onready var tween : Tween = $Tween
 
@@ -49,12 +49,22 @@ func _physics_process(delta):
 		sprite.flip_h = false
 
 func _input(event):
-	if event.is_action_pressed("left_mouse") and spell_a_cooldown.is_stopped():
-		emit_signal("shoot_projectile", act_energies)
-		spell_a_cooldown.start()
-	if event.is_action_pressed("right_mouse") and spell_b_cooldown.is_stopped():
+	if event.is_action_pressed("left_mouse") and shoot_cooldown.is_stopped():
+		var color = Vector3(0, 0, 0)
+		for energy in act_energies:
+			match energy:
+				1:
+					color.x += 1
+				2:
+					color.y += 1
+				3:
+					color.z += 1
+		emit_signal("shoot_projectile", color)
+		shoot_cooldown.wait_time = 0.3 - 0.05 * color.y
+		shoot_cooldown.start()
+	if event.is_action_pressed("right_mouse") and spell_cooldown.is_stopped():
 		#Cast spell B
-		spell_b_cooldown.start()
+		spell_cooldown.start()
 	
 	if event.is_action_pressed("green_energy"):
 		energy_manager(1)

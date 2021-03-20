@@ -133,11 +133,11 @@ centered = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 10 )
 
-[node name="CooldownA" type="Timer" parent="."]
+[node name="ShootCD" type="Timer" parent="."]
 wait_time = 0.3
 one_shot = true
 
-[node name="CooldownB" type="Timer" parent="."]
+[node name="SpellCD" type="Timer" parent="."]
 one_shot = true
 
 [node name="Energies" type="Node2D" parent="."]
