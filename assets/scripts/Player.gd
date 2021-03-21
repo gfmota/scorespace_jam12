@@ -9,7 +9,7 @@ var knockback_dir : Vector2
 onready var act_energies : Array = [1, 1, 1]
 onready var damaged_sfx : AudioStreamPlayer2D = $DamagedSFX
 onready var ind_energy : int = 0
-onready var is_knocking : bool = false
+onready var invulnerable_timer : Timer = $InvulnerableTimer
 onready var knockback_timer : Timer = $KnockbackTimer
 onready var hitbox : Area2D = $Hitbox
 onready var energies_node : Node2D = $Energies
@@ -30,7 +30,7 @@ func _ready():
 
 func _physics_process(delta):
 	var direction : Vector2 = Vector2.ZERO
-	if not is_knocking:
+	if knockback_timer.is_stopped():
 		if Input.is_action_pressed("right"):
 			direction += Vector2.RIGHT
 		if Input.is_action_pressed("left"):
@@ -39,22 +39,22 @@ func _physics_process(delta):
 			direction += Vector2.UP
 		if Input.is_action_pressed("down"):
 			direction += Vector2.DOWN
-		
-		if direction == Vector2.ZERO:
-			sprite.play("idle")
-		elif sprite.animation != "run":
-				sprite.play("run")
+		direction = direction.normalized()
 	
 	else:
-		direction = knockback_dir
-		
-		sprite.play("damage")
+		direction = knockback_dir.normalized() * 2
 	
-	direction = direction.normalized() * 3 if is_knocking else direction.normalized()
 	speed += direction * ACCELERATION * delta
 	speed = speed.clamped(MAX_SPEED)
 	speed *= FRICTION
 	move_and_slide(speed)
+	
+	if not invulnerable_timer.is_stopped():
+		sprite.play("damage")
+	elif direction == Vector2.ZERO:
+		sprite.play("idle")
+	else:
+		sprite.play("run")
 	
 	var mouse_pos : Vector2 = get_global_mouse_position()
 	if mouse_pos.x - global_position.x < 0 and not sprite.flip_h:
@@ -85,18 +85,17 @@ func _input(event):
 		energy_manager(3)
 
 func on_hitbox_body_entered(body):
-	if not is_knocking and body is Enemy:
+	if invulnerable_timer.is_stopped() and body is Enemy:
 		emit_signal("damaged")
 		knockback_dir = global_position - body.global_position
 		knockback_timer.start()
+		invulnerable_timer.start()
 		sprite.play("damage")
 		damaged_sfx.play()
-		is_knocking = true
 
 func on_knockback_ended():
 	if get_parent().health == 0:
 		call_deferred("free")
-	is_knocking = false
 
 func energy_manager(color):
 	act_energies[ind_energy] = color
