@@ -49,7 +49,7 @@ func on_player_damaged():
 		pause_manager.game_over(score)
 
 func on_difficult_timer_timeout():
-	enemy_num *= 1.5
+	enemy_num += 2
 
 func on_timeout_SpawnTimerL():
 	spawn_enemy(3)

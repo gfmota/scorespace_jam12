@@ -27,7 +27,7 @@ func _ready():
 func _physics_process(delta):
 	if in_knockback:
 		sprite.play("damage")
-		motion = knockback_dir * speed * delta / size
+		motion = knockback_dir * speed * delta / (size * 2)
 	
 	target = player.global_position if player != null else global_position
 	if target.x - global_position.x < 0 and not sprite.flip_h:

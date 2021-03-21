@@ -23,16 +23,22 @@ func on_play_pressed():
 	next_scene = "res://assets/scenes/Arena.tscn"
 	fade.fade_out()
 	MenuMusic.stop_music()
+	ButtonSFX.play()
 
 func on_leaderboard_pressed():
 	next_scene = "res://assets/scenes/Leaderboard.tscn"
 	fade.fade_out()
+	ButtonSFX.play()
 
 func on_how2play_pressed():
-	pass
+	next_scene = "res://assets/scenes/HowToPlay.tscn"
+	fade.fade_out()
+	ButtonSFX.play()
 
 func on_credits_pressed():
-	pass
+	next_scene = "res://assets/scenes/Credits.tscn"
+	fade.fade_out()
+	ButtonSFX.play()
 
 func on_fade_out_end():
 	get_tree().change_scene(next_scene)

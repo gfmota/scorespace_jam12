@@ -1,0 +1,71 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://assets/font/Chonkly.otf" type="DynamicFontData" id=1]
+[ext_resource path="res://assets/scenes/Fade.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/sprites/button.png" type="Texture" id=3]
+[ext_resource path="res://assets/sprites/menu_background.png" type="Texture" id=4]
+[ext_resource path="res://assets/sprites/itchio logo.png" type="Texture" id=5]
+[ext_resource path="res://assets/scripts/Credits.gd" type="Script" id=6]
+
+[sub_resource type="DynamicFont" id=1]
+size = 64
+outline_size = 8
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 48
+outline_size = 6
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 1 )
+
+[node name="Credits" type="Node2D"]
+script = ExtResource( 6 )
+
+[node name="Background" type="Sprite" parent="."]
+scale = Vector2( 4, 4 )
+texture = ExtResource( 4 )
+centered = false
+
+[node name="Itch" type="Sprite" parent="."]
+position = Vector2( 140, 188 )
+scale = Vector2( 0.2, 0.2 )
+texture = ExtResource( 5 )
+centered = false
+
+[node name="Text" type="Label" parent="."]
+margin_left = 128.0
+margin_top = 64.0
+margin_right = 896.0
+margin_bottom = 472.0
+custom_fonts/font = SubResource( 1 )
+text = "This game was made by Gabriel Mota
+    @gmota
+For the ScoreSpace Jam 12"
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Btn" type="Sprite" parent="."]
+position = Vector2( 392, 480 )
+scale = Vector2( 5, 5 )
+texture = ExtResource( 3 )
+centered = false
+
+[node name="Button" type="Button" parent="."]
+margin_left = 392.0
+margin_top = 488.0
+margin_right = 632.0
+margin_bottom = 568.0
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color_hover = Color( 1, 0.352941, 0.352941, 1 )
+custom_colors/font_color_pressed = Color( 0.827451, 0, 0, 1 )
+text = "BACK"
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Fade" parent="." instance=ExtResource( 2 )]

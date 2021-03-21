@@ -52,6 +52,7 @@ func _ready():
 
 func on_menu_btn_pressed():
 	fade.fade_out()
+	ButtonSFX.play()
 
 func on_end_fade_out():
 	get_tree().change_scene("res://assets/scenes/Menu.tscn")

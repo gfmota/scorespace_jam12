@@ -26,6 +26,7 @@ func on_gameover_btn_pressed():
 		Global.player_name = game_over_node.get_node("LineEdit").text
 		get_parent().get_node("Fade").fade_out()
 		InGameMusic.stop_music()
+		ButtonSFX.play()
 
 func on_end_fade_out():
 	get_tree().change_scene("res://assets/scenes/Leaderboard.tscn")
