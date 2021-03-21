@@ -5,7 +5,6 @@ signal died
 export var health : int
 export var size : int
 export var speed : int
-export var weight : float
 var knockback_dir : Vector2
 var player : KinematicBody2D
 var position_ini : Vector2
@@ -28,7 +27,7 @@ func _ready():
 func _physics_process(delta):
 	if in_knockback:
 		sprite.play("damage")
-		motion = knockback_dir * speed * delta / weight
+		motion = knockback_dir * speed * delta / size
 	
 	target = player.global_position if player != null else global_position
 	if target.x - global_position.x < 0 and not sprite.flip_h:
