@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://assets/scripts/Player.gd" type="Script" id=1]
 [ext_resource path="res://assets/sprites/tile.png" type="Texture" id=2]
@@ -38,6 +38,14 @@ region = Rect2( 224, 160, 16, 32 )
 atlas = ExtResource( 2 )
 region = Rect2( 240, 160, 16, 32 )
 
+[sub_resource type="AtlasTexture" id=25]
+atlas = ExtResource( 2 )
+region = Rect2( 128, 160, 16, 32 )
+
+[sub_resource type="AtlasTexture" id=26]
+atlas = ExtResource( 2 )
+region = Rect2( 272, 160, 16, 32 )
+
 [sub_resource type="SpriteFrames" id=9]
 animations = [ {
 "frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ) ],
@@ -49,10 +57,18 @@ animations = [ {
 "loop": true,
 "name": "run",
 "speed": 8.0
+}, {
+"frames": [ SubResource( 25 ), SubResource( 26 ) ],
+"loop": true,
+"name": "damage",
+"speed": 20.0
 } ]
 
 [sub_resource type="RectangleShape2D" id=10]
-extents = Vector2( 12, 16 )
+extents = Vector2( 10.9413, 14 )
+
+[sub_resource type="RectangleShape2D" id=24]
+extents = Vector2( 13.537, 16 )
 
 [sub_resource type="AtlasTexture" id=11]
 atlas = ExtResource( 3 )
@@ -130,14 +146,22 @@ frames = SubResource( 9 )
 animation = "idle"
 centered = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="Collision" type="CollisionShape2D" parent="."]
+position = Vector2( 1, 0 )
 shape = SubResource( 10 )
+
+[node name="Hitbox" type="Area2D" parent="."]
+
+[node name="Collision" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2( 1, 0 )
+shape = SubResource( 24 )
 
 [node name="ShootCD" type="Timer" parent="."]
 wait_time = 0.3
 one_shot = true
 
-[node name="SpellCD" type="Timer" parent="."]
+[node name="KnockbackTimer" type="Timer" parent="."]
+wait_time = 0.2
 one_shot = true
 
 [node name="Energies" type="Node2D" parent="."]

@@ -1,31 +1,31 @@
 [gd_scene load_steps=12 format=2]
 
-[ext_resource path="res://assets/scripts/EnDemon.gd" type="Script" id=1]
-[ext_resource path="res://assets/sprites/enemy_demon_l.png" type="Texture" id=2]
+[ext_resource path="res://assets/sprites/tile.png" type="Texture" id=1]
+[ext_resource path="res://assets/scripts/EnDemon.gd" type="Script" id=2]
 
 [sub_resource type="AtlasTexture" id=1]
-atlas = ExtResource( 2 )
-region = Rect2( 32, 0, 32, 48 )
+atlas = ExtResource( 1 )
+region = Rect2( 432, 48, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=2]
-atlas = ExtResource( 2 )
-region = Rect2( 64, 0, 32, 48 )
+atlas = ExtResource( 1 )
+region = Rect2( 448, 48, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=3]
-atlas = ExtResource( 2 )
-region = Rect2( 96, 0, 32, 48 )
+atlas = ExtResource( 1 )
+region = Rect2( 464, 48, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=4]
-atlas = ExtResource( 2 )
-region = Rect2( 128, 0, 32, 48 )
+atlas = ExtResource( 1 )
+region = Rect2( 480, 48, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=5]
-atlas = ExtResource( 2 )
-region = Rect2( 0, 0, 32, 48 )
+atlas = ExtResource( 1 )
+region = Rect2( 368, 48, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=6]
-atlas = ExtResource( 2 )
-region = Rect2( 160, 0, 32, 48 )
+atlas = ExtResource( 1 )
+region = Rect2( 496, 48, 16, 16 )
 
 [sub_resource type="SpriteFrames" id=7]
 animations = [ {
@@ -40,39 +40,38 @@ animations = [ {
 "speed": 20.0
 } ]
 
-[sub_resource type="CapsuleShape2D" id=8]
-radius = 15.7773
-height = 20.8344
+[sub_resource type="CircleShape2D" id=8]
+radius = 9.10691
 
-[sub_resource type="CapsuleShape2D" id=9]
-radius = 22.3403
-height = 16.0824
+[sub_resource type="CircleShape2D" id=9]
+radius = 12.0702
 
-[node name="EnDemonL" type="KinematicBody2D"]
+[node name="EnDemonS" type="KinematicBody2D"]
 collision_layer = 3
 collision_mask = 3
-script = ExtResource( 1 )
-health = 12
-size = 3
-speed = 1000
+script = ExtResource( 2 )
+health = 4
+size = 1
+speed = 1600
 
 [node name="Sprite" type="AnimatedSprite" parent="."]
-position = Vector2( 0, -16 )
+position = Vector2( 0.210228, -0.0229759 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 7 )
 animation = "damage"
 
 [node name="Collision" type="CollisionShape2D" parent="."]
-position = Vector2( 0.222725, 0.222725 )
+position = Vector2( 1.48651, 5.20279 )
 shape = SubResource( 8 )
 
 [node name="Hitbox" type="Area2D" parent="."]
 
 [node name="Collision" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2( 1.7838, 5.05413 )
 shape = SubResource( 9 )
+
+[node name="Tween" type="Tween" parent="."]
 
 [node name="KnockbackTimer" type="Timer" parent="."]
 wait_time = 0.2
 one_shot = true
-
-[node name="Tween" type="Tween" parent="."]
