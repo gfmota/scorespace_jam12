@@ -8,19 +8,24 @@ export var shoot_scene : PackedScene
 var rng = RandomNumberGenerator.new()
 onready var animation_player : AnimationPlayer = $AnimationPlayer
 onready var health : int = 6
-onready var hearts : Sprite = $Hearts
+onready var hearts : Sprite = $HUD/Hearts
+onready var fade : Node2D = $Fade
+onready var pause_manager : Node2D = $PauseManager
 onready var player : KinematicBody2D = $Player
 onready var screen_shake : Node = $ScreenShake
 onready var score : int = 0
-onready var score_label : Label = $Score/Label
+onready var score_label : Label = $HUD/Label
 onready var spawn_locations : Node2D = $SpawnLocations
 onready var spawn_timer : Timer = $SpawnTimer
 
 func _ready():
+	fade.connect("end_fade_in", self, "on_end_fade_in")
+	fade.connect("end_fade_out", pause_manager, "on_end_fade_out")
 	player.connect("shoot_projectile", self, "on_player_shoot_projectile")
 	player.connect("damaged", self, "on_player_damaged")
 	spawn_timer.connect("timeout", self, "spawn_enemy")
 	
+	fade.fade_in()
 	animation_player.play("hud")
 
 func on_player_shoot_projectile(color):
@@ -35,8 +40,8 @@ func on_player_damaged():
 	hearts.frame += 1
 	screen_shake.start()
 	if health == 0:
-		# Game over
-		pass
+		get_node("HUD").call_deferred("free")
+		pause_manager.game_over(score)
 
 func spawn_enemy():
 	rng.randomize()
@@ -66,6 +71,9 @@ func spawn_enemy():
 func on_enemy_died(size, pos):
 	var points = points_scene.instance()
 	score += size * 10
-	score_label.text = "%03d" % score
+	score_label.text = str(score).pad_zeros(3)
 	points.setup(size * 10, pos)
 	add_child(points)
+
+func on_end_fade_in():
+	spawn_timer.start()

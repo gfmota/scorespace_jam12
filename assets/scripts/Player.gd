@@ -92,6 +92,8 @@ func on_hitbox_body_entered(body):
 		is_knocking = true
 
 func on_knockback_ended():
+	if get_parent().health == 0:
+		call_deferred("free")
 	is_knocking = false
 
 func energy_manager(color):

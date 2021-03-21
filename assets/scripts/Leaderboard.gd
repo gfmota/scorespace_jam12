@@ -1,13 +1,17 @@
 extends Node2D
 
-var player_name : String
-var player_score : int
+onready var fade : Node = $Fade
+onready var menu_btn : Button = $Button
 onready var rank : Label = $Text
 
 func _ready():
+	fade.connect("end_fade_out", self, "on_end_fade_out")
+	menu_btn.connect("pressed", self, "on_menu_btn_pressed")
+	fade.fade_in()
+	
 	var player_data = {
-		"name" : player_name if player_name else "",
-		"points" : player_score if player_score else 0,
+		"name" : Global.player_name if Global.player_name else "xxx",
+		"points" : Global.player_score if Global.player_score else 0,
 	}
 	var data
 	var file = File.new()
@@ -42,8 +46,10 @@ func _ready():
 		file.open("user://save.dat", File.WRITE)
 		file.store_var(data)
 	file.close()
-	rank.text = "1. " + data["name1"] + " - " + str(data["points1"]).pad_zeros(10) + "\n2. " + data["name2"] + " - " + str(data["points2"]).pad_zeros(10) + "\n3. " + data["name3"] + " - " + str(data["points3"]).pad_zeros(10) + "\n4. " + data["name1"] + " - " + str(data["points1"]).pad_zeros(10) + "\n5. " + data["name2"] + " - " + str(data["points2"]).pad_zeros(10)
+	rank.text = "1. " + data["name1"].to_upper() + " - " + str(data["points1"]).pad_zeros(10) + "\n2. " + data["name2"].to_upper() + " - " + str(data["points2"]).pad_zeros(10) + "\n3. " + data["name3"].to_upper() + " - " + str(data["points3"]).pad_zeros(10) + "\n4. " + data["name4"].to_upper() + " - " + str(data["points4"]).pad_zeros(10) + "\n5. " + data["name5"].to_upper() + " - " + str(data["points5"]).pad_zeros(10)
 
-func setup(nam, score):
-	player_name = nam
-	player_score = score
+func on_menu_btn_pressed():
+	fade.fade_out()
+
+func on_end_fade_out():
+	get_tree().change_scene("res://assets/scenes/Menu.tscn")

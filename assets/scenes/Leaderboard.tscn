@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://assets/font/Chonkly.otf" type="DynamicFontData" id=1]
 [ext_resource path="res://assets/sprites/menu_background.png" type="Texture" id=2]
 [ext_resource path="res://assets/sprites/button.png" type="Texture" id=3]
 [ext_resource path="res://assets/scripts/Leaderboard.gd" type="Script" id=4]
+[ext_resource path="res://assets/scenes/Fade.tscn" type="PackedScene" id=5]
 
 [sub_resource type="DynamicFont" id=1]
 size = 96
@@ -11,13 +12,13 @@ outline_size = 10
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 1 )
 
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="DynamicFont" id=2]
 size = 64
 outline_size = 10
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 1 )
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="DynamicFont" id=3]
 size = 44
 outline_size = 8
 outline_color = Color( 0, 0, 0, 1 )
@@ -47,7 +48,7 @@ margin_left = 160.0
 margin_top = 140.0
 margin_right = 868.0
 margin_bottom = 480.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 2 )
 text = "1. MMM 8888888888
 2. ILE 
 3. LAR 0050
@@ -72,7 +73,7 @@ margin_left = 416.0
 margin_top = 508.0
 margin_right = 604.0
 margin_bottom = 576.0
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 3 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_colors/font_color_hover = Color( 1, 0.352941, 0.352941, 1 )
 custom_colors/font_color_pressed = Color( 0.827451, 0, 0, 1 )
@@ -81,3 +82,5 @@ flat = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Fade" parent="." instance=ExtResource( 5 )]
