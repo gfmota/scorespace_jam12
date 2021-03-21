@@ -25,6 +25,7 @@ func _ready():
 	fade.connect("end_fade_out", pause_manager, "on_end_fade_out")
 	player.connect("shoot_projectile", self, "on_player_shoot_projectile")
 	player.connect("damaged", self, "on_player_damaged")
+	difficult_timer.connect("timeout", self, "on_difficult_timer_timeout")
 	for timer in spawn_timers:
 		timer.start()
 		timer.connect("timeout", self, "on_timeout_" + timer.name)
@@ -45,8 +46,10 @@ func on_player_damaged():
 	hearts.frame += 1
 	screen_shake.start()
 	if health == 0:
-		get_node("HUD").call_deferred("free")
 		pause_manager.game_over(score)
+
+func on_difficult_timer_timeout():
+	enemy_num *= 1.5
 
 func on_timeout_SpawnTimerL():
 	spawn_enemy(3)
