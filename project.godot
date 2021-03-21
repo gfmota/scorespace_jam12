@@ -21,6 +21,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Scorespace Jam 12"
+run/main_scene="res://assets/scenes/Menu.tscn"
 config/icon="res://icon.png"
 
 [autoload]

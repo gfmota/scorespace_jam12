@@ -1,0 +1,187 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://assets/font/Chonkly.otf" type="DynamicFontData" id=1]
+[ext_resource path="res://assets/scenes/Fade.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/sprites/button.png" type="Texture" id=3]
+[ext_resource path="res://assets/sprites/menu_background.png" type="Texture" id=4]
+[ext_resource path="res://assets/sprites/green_energy.png" type="Texture" id=5]
+[ext_resource path="res://assets/sprites/red_energy.png" type="Texture" id=6]
+[ext_resource path="res://assets/sprites/blue_energy.png" type="Texture" id=7]
+[ext_resource path="res://assets/scripts/CreditsH2P.gd" type="Script" id=8]
+
+[sub_resource type="DynamicFont" id=1]
+size = 32
+outline_size = 6
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 48
+outline_size = 6
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 1 )
+
+[node name="HowToPlay" type="Node2D"]
+script = ExtResource( 8 )
+
+[node name="Background" type="Sprite" parent="."]
+scale = Vector2( 4, 4 )
+texture = ExtResource( 4 )
+centered = false
+
+[node name="Label" type="Label" parent="."]
+margin_left = 128.0
+margin_top = 16.0
+margin_right = 896.0
+margin_bottom = 591.0
+custom_fonts/font = SubResource( 1 )
+text = "You are a mage that may stop the imp infestation. To do so you need to control the energy of your 3 elemental orbs.
+
+
+
+
+You can control up to three orbs at time and you can combine the elements to make the perfect spell for what you need.
+
+You can move with A, S, W, D and shoot with the left-click mouse.
+To trade the orbs, use 
+"
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Arcane" type="Label" parent="."]
+margin_left = 128.0
+margin_top = 120.0
+margin_right = 896.0
+margin_bottom = 591.0
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0.227451, 0.870588, 0.372549, 1 )
+text = "     Arcane: make your spell bigger.
+
+
+
+
+
+
+
+
+
+
+     Z to ARCANE;"
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Storm" type="Label" parent="."]
+margin_left = 128.0
+margin_top = 152.0
+margin_right = 896.0
+margin_bottom = 591.0
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0.227451, 0.552941, 0.870588, 1 )
+text = "     Storm: make your spell faster and reduces it's recharge.
+
+
+
+
+
+
+
+
+
+     X to STORM;"
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Impetus" type="Label" parent="."]
+margin_left = 128.0
+margin_top = 220.0
+margin_right = 896.0
+margin_bottom = 591.0
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0.870588, 0.227451, 0.227451, 1 )
+text = "     Impetus: make your spell stronger.
+
+
+
+
+
+
+
+
+
+     C to IMPETUS."
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 664, 464 )
+scale = Vector2( 5, 5 )
+texture = ExtResource( 3 )
+centered = false
+
+[node name="Button" type="Button" parent="."]
+margin_left = 664.0
+margin_top = 468.0
+margin_right = 904.0
+margin_bottom = 552.0
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color_hover = Color( 1, 0.352941, 0.352941, 1 )
+custom_colors/font_color_pressed = Color( 0.827451, 0, 0, 1 )
+text = "BACK"
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Blue" type="Sprite" parent="."]
+position = Vector2( 136, 148 )
+scale = Vector2( 4, 4 )
+texture = ExtResource( 7 )
+centered = false
+hframes = 4
+
+[node name="Green" type="Sprite" parent="."]
+position = Vector2( 136, 116 )
+scale = Vector2( 4, 4 )
+texture = ExtResource( 5 )
+centered = false
+hframes = 4
+
+[node name="Green2" type="Sprite" parent="."]
+position = Vector2( 136, 492 )
+scale = Vector2( 4, 4 )
+texture = ExtResource( 5 )
+centered = false
+hframes = 4
+
+[node name="Blue2" type="Sprite" parent="."]
+position = Vector2( 136, 524 )
+scale = Vector2( 4, 4 )
+texture = ExtResource( 7 )
+centered = false
+hframes = 4
+
+[node name="Red" type="Sprite" parent="."]
+position = Vector2( 140, 216 )
+scale = Vector2( 4, 4 )
+texture = ExtResource( 6 )
+centered = false
+hframes = 4
+
+[node name="Red2" type="Sprite" parent="."]
+position = Vector2( 136, 556 )
+scale = Vector2( 4, 4 )
+texture = ExtResource( 6 )
+centered = false
+hframes = 4
+
+[node name="Fade" parent="." instance=ExtResource( 2 )]
+visible = false
