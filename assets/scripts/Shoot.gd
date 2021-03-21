@@ -16,9 +16,9 @@ func setup(pos, dir, color):
 	global_position = pos
 	direction = dir
 	rotation_degrees = rad2deg(dir.angle())
-	speed += color.y * 30
+	speed += color.y * 40
 	damage += color.z
-	scale = Vector2(1 + color.x/3, 1 + color.x/3)
+	scale = Vector2(1 + color.x/2, 1 + color.x/2)
 	match color:
 		Vector3(3, 0, 0):
 			modulate = colors[0]
@@ -34,7 +34,6 @@ func setup(pos, dir, color):
 			modulate = colors[5]
 		Vector3(0, 3, 0):
 			modulate = colors[6]
-			
 		Vector3(0, 2, 1):
 			modulate = colors[7]
 		Vector3(0, 1, 2):

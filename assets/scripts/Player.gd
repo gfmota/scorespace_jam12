@@ -74,7 +74,7 @@ func _input(event):
 				3:
 					color.z += 1
 		emit_signal("shoot_projectile", color)
-		shoot_cooldown.wait_time = 0.3 - 0.05 * color.y
+		shoot_cooldown.wait_time = 0.3 - 0.06 * color.y
 		shoot_cooldown.start()
 	
 	if event.is_action_pressed("green_energy"):
