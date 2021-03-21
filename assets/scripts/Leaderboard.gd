@@ -8,6 +8,8 @@ func _ready():
 	fade.connect("end_fade_out", self, "on_end_fade_out")
 	menu_btn.connect("pressed", self, "on_menu_btn_pressed")
 	fade.fade_in()
+	if not MenuMusic.playing:
+		MenuMusic.play_music()
 	
 	var player_data = {
 		"name" : Global.player_name if Global.player_name else "xxx",

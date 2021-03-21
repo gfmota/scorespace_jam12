@@ -26,6 +26,9 @@ config/icon="res://icon.png"
 [autoload]
 
 Global="*res://assets/scripts/Global.gd"
+ButtonSFX="*res://assets/scenes/sound/ButtonSFX.tscn"
+InGameMusic="*res://assets/scenes/sound/InGameMusic.tscn"
+MenuMusic="*res://assets/scenes/sound/MenuMusic.tscn"
 
 [display]
 

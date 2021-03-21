@@ -1,43 +1,44 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://assets/scripts/EnDemon.gd" type="Script" id=1]
 [ext_resource path="res://assets/sprites/tile.png" type="Texture" id=2]
+[ext_resource path="res://assets/sfx/EnemyDamaged.wav" type="AudioStream" id=3]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 2 )
-region = Rect2( 432, 320, 16, 32 )
+region = Rect2( 400, 320, 16, 32 )
 
 [sub_resource type="AtlasTexture" id=2]
 atlas = ExtResource( 2 )
-region = Rect2( 448, 320, 16, 32 )
+region = Rect2( 496, 320, 16, 32 )
 
 [sub_resource type="AtlasTexture" id=3]
 atlas = ExtResource( 2 )
-region = Rect2( 464, 320, 16, 32 )
+region = Rect2( 432, 320, 16, 32 )
 
 [sub_resource type="AtlasTexture" id=4]
 atlas = ExtResource( 2 )
-region = Rect2( 480, 320, 16, 32 )
+region = Rect2( 448, 320, 16, 32 )
 
 [sub_resource type="AtlasTexture" id=5]
 atlas = ExtResource( 2 )
-region = Rect2( 400, 320, 16, 32 )
+region = Rect2( 464, 320, 16, 32 )
 
 [sub_resource type="AtlasTexture" id=6]
 atlas = ExtResource( 2 )
-region = Rect2( 496, 320, 16, 32 )
+region = Rect2( 480, 320, 16, 32 )
 
 [sub_resource type="SpriteFrames" id=7]
 animations = [ {
-"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ) ],
-"loop": true,
-"name": "run",
-"speed": 8.0
-}, {
-"frames": [ SubResource( 5 ), SubResource( 6 ) ],
+"frames": [ SubResource( 1 ), SubResource( 2 ) ],
 "loop": true,
 "name": "damage",
 "speed": 20.0
+}, {
+"frames": [ SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ) ],
+"loop": true,
+"name": "run",
+"speed": 8.0
 } ]
 
 [sub_resource type="CapsuleShape2D" id=8]
@@ -52,9 +53,10 @@ height = 7.06756
 collision_layer = 3
 collision_mask = 3
 script = ExtResource( 1 )
-health = 8
+health = 9
 size = 2
 speed = 1300
+weight = 2.5
 
 [node name="Sprite" type="AnimatedSprite" parent="."]
 position = Vector2( 0, -16 )
@@ -75,5 +77,8 @@ shape = SubResource( 9 )
 [node name="Tween" type="Tween" parent="."]
 
 [node name="KnockbackTimer" type="Timer" parent="."]
-wait_time = 0.2
+wait_time = 0.3
 one_shot = true
+
+[node name="DamagedSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 3 )

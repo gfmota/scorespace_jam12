@@ -7,6 +7,7 @@ const MAX_SPEED : int = 2500
 const FRICTION : float = 0.9
 var knockback_dir : Vector2
 onready var act_energies : Array = [1, 1, 1]
+onready var damaged_sfx : AudioStreamPlayer2D = $DamagedSFX
 onready var ind_energy : int = 0
 onready var is_knocking : bool = false
 onready var knockback_timer : Timer = $KnockbackTimer
@@ -89,6 +90,7 @@ func on_hitbox_body_entered(body):
 		knockback_dir = global_position - body.global_position
 		knockback_timer.start()
 		sprite.play("damage")
+		damaged_sfx.play()
 		is_knocking = true
 
 func on_knockback_ended():

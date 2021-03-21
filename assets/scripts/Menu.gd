@@ -16,10 +16,13 @@ func _ready():
 	fade.connect("end_fade_out", self, "on_fade_out_end")
 	anim_title.play("title")
 	fade.fade_in()
+	if not MenuMusic.playing:
+		MenuMusic.play_music()
 
 func on_play_pressed():
 	next_scene = "res://assets/scenes/Arena.tscn"
 	fade.fade_out()
+	MenuMusic.stop_music()
 
 func on_leaderboard_pressed():
 	next_scene = "res://assets/scenes/Leaderboard.tscn"

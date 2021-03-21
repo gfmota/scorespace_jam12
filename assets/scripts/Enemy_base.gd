@@ -5,12 +5,14 @@ signal died
 export var health : int
 export var size : int
 export var speed : int
+export var weight : float
 var knockback_dir : Vector2
 var player : KinematicBody2D
 var position_ini : Vector2
 var position_end : Vector2
 var motion : Vector2
 var target : Vector2
+onready var damaged_sfx : AudioStreamPlayer2D = $DamagedSFX
 onready var in_knockback : bool = false
 onready var knockback_timer : Timer = $KnockbackTimer
 onready var sprite : AnimatedSprite = $Sprite
@@ -26,7 +28,7 @@ func _ready():
 func _physics_process(delta):
 	if in_knockback:
 		sprite.play("damage")
-		motion = knockback_dir * speed * delta * 2 / 3
+		motion = knockback_dir * speed * delta / weight
 	
 	target = player.global_position if player != null else global_position
 	if target.x - global_position.x < 0 and not sprite.flip_h:
@@ -46,6 +48,7 @@ func damage(value, shoot_pos):
 		knockback_dir = global_position - shoot_pos
 		in_knockback = true
 		knockback_timer.start()
+		damaged_sfx.play()
 		if health <= 0:
 			tween.interpolate_property(self, "modulate:a", 1, 0, knockback_timer.wait_time, Tween.TRANS_QUINT, Tween.EASE_IN)
 			tween.start()
