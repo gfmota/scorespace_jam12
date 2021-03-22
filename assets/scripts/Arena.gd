@@ -111,11 +111,12 @@ func spawn_enemy(size):
 		add_child(enemy_instance)
 
 func on_witch_shoot(witch_pos):
-	var shoot = enemy_shoot_scene.instance()
-	var direction : Vector2 = player.global_position - witch_pos
-	direction = direction.normalized()
-	shoot.setup(witch_pos + direction * 24, direction)
-	add_child(shoot)
+	if player != null:
+		var shoot = enemy_shoot_scene.instance()
+		var direction : Vector2 = player.global_position - witch_pos
+		direction = direction.normalized()
+		shoot.setup(witch_pos + direction * 24, direction)
+		add_child(shoot)
 
 func on_enemy_died(size, pos):
 	var points = points_scene.instance()
