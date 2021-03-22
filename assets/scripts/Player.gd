@@ -67,9 +67,8 @@ func _physics_process(delta):
 		sprite.flip_h = true
 	elif mouse_pos.x - global_position.x > 0 and sprite.flip_h:
 		sprite.flip_h = false
-
-func _input(event):
-	if event.is_action_pressed("left_mouse") and shoot_cooldown.is_stopped():
+	
+	if Input.is_action_pressed("left_mouse") and shoot_cooldown.is_stopped():
 		var color = Vector3(0, 0, 0)
 		for energy in act_energies:
 			match energy:
@@ -80,9 +79,10 @@ func _input(event):
 				3:
 					color.z += 1
 		emit_signal("shoot_projectile", color)
-		shoot_cooldown.wait_time = 0.3 - 0.06 * color.y
+		shoot_cooldown.wait_time = 0.35 - 0.05 * color.y
 		shoot_cooldown.start()
-	
+
+func _input(event):
 	if event.is_action_pressed("green_energy"):
 		energy_manager(1)
 	if event.is_action_pressed("blue_energy"):
