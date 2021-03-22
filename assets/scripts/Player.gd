@@ -91,16 +91,17 @@ func _input(event):
 		energy_manager(3)
 
 func on_hitbox_body_entered(body):
-	if invulnerable_timer.is_stopped() and body is Enemy:
+	if body is Enemy:
 		damage(body)
 
 func damage(body):
-	emit_signal("damaged")
-	knockback_dir = global_position - body.global_position
-	knockback_timer.start()
-	invulnerable_timer.start()
-	sprite.play("damage")
-	damaged_sfx.play()
+	if invulnerable_timer.is_stopped():
+		emit_signal("damaged")
+		knockback_dir = global_position - body.global_position
+		knockback_timer.start()
+		invulnerable_timer.start()
+		sprite.play("damage")
+		damaged_sfx.play()
 
 func on_knockback_ended():
 	if get_parent().health == 0:
