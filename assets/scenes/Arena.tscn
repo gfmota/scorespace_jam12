@@ -1,11 +1,11 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://assets/scenes/TileMap.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/scenes/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/scripts/Arena.gd" type="Script" id=3]
 [ext_resource path="res://assets/scenes/Shoot.tscn" type="PackedScene" id=4]
 [ext_resource path="res://assets/scenes/EnDemonS.tscn" type="PackedScene" id=5]
-[ext_resource path="res://assets/scenes/EnDemonM.tscn" type="PackedScene" id=6]
+[ext_resource path="res://assets/scenes/EnWitch.tscn" type="PackedScene" id=6]
 [ext_resource path="res://assets/scenes/EnDemonL.tscn" type="PackedScene" id=7]
 [ext_resource path="res://assets/font/Chonkly.otf" type="DynamicFontData" id=8]
 [ext_resource path="res://assets/scenes/Points.tscn" type="PackedScene" id=9]
@@ -14,6 +14,8 @@
 [ext_resource path="res://assets/scripts/ScreenShake.gd" type="Script" id=12]
 [ext_resource path="res://assets/sprites/button.png" type="Texture" id=13]
 [ext_resource path="res://assets/scenes/Fade.tscn" type="PackedScene" id=14]
+[ext_resource path="res://assets/scenes/EnDemonM.tscn" type="PackedScene" id=15]
+[ext_resource path="res://assets/scenes/EnShoot.tscn" type="PackedScene" id=16]
 
 [sub_resource type="DynamicFont" id=1]
 size = 64
@@ -76,9 +78,11 @@ tracks/1/keys = {
 [node name="Arena" type="Node2D"]
 script = ExtResource( 3 )
 enemy_demon_s = ExtResource( 5 )
-enemy_demon_m = ExtResource( 6 )
+enemy_demon_m = ExtResource( 15 )
 enemy_demon_l = ExtResource( 7 )
+enemy_witch = ExtResource( 6 )
 points_scene = ExtResource( 9 )
+enemy_shoot_scene = ExtResource( 16 )
 shoot_scene = ExtResource( 4 )
 
 [node name="Tiles" type="Node2D" parent="."]
@@ -156,6 +160,9 @@ wait_time = 13.0
 
 [node name="SpawnTimerS" type="Timer" parent="."]
 wait_time = 7.0
+
+[node name="SpawnTimerW" type="Timer" parent="."]
+wait_time = 19.0
 
 [node name="PauseManager" type="Node2D" parent="."]
 pause_mode = 2

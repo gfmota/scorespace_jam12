@@ -2,6 +2,8 @@ extends KinematicBody2D
 class_name Enemy
 
 signal died
+const ACCELERATION : int = 500
+const FRICTION : float = 0.9
 export var health : int
 export var size : int
 export var speed : int

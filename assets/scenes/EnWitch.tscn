@@ -1,0 +1,84 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://assets/scripts/EnWitch.gd" type="Script" id=1]
+[ext_resource path="res://assets/sprites/tile.png" type="Texture" id=2]
+[ext_resource path="res://assets/sfx/EnemyDamaged.wav" type="AudioStream" id=3]
+[ext_resource path="res://assets/scenes/EnShoot.tscn" type="PackedScene" id=4]
+
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 2 )
+region = Rect2( 432, 272, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 2 )
+region = Rect2( 448, 272, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 2 )
+region = Rect2( 368, 272, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 2 )
+region = Rect2( 384, 272, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 2 )
+region = Rect2( 400, 272, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 2 )
+region = Rect2( 416, 272, 16, 16 )
+
+[sub_resource type="SpriteFrames" id=7]
+animations = [ {
+"frames": [ SubResource( 1 ), SubResource( 2 ) ],
+"loop": true,
+"name": "damage",
+"speed": 20.0
+}, {
+"frames": [ SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ) ],
+"loop": true,
+"name": "run",
+"speed": 5.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=8]
+extents = Vector2( 10, 13.7052 )
+
+[sub_resource type="RectangleShape2D" id=9]
+extents = Vector2( 15.4546, 16.089 )
+
+[node name="EnWitch" type="KinematicBody2D"]
+collision_layer = 3
+collision_mask = 3
+script = ExtResource( 1 )
+health = 10
+size = 5
+speed = 1000
+shoot_scene = ExtResource( 4 )
+
+[node name="Tween" type="Tween" parent="."]
+
+[node name="KnockbackTimer" type="Timer" parent="."]
+wait_time = 0.2
+
+[node name="ShootCD" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
+
+[node name="Sprite" type="AnimatedSprite" parent="."]
+scale = Vector2( 2, 2 )
+frames = SubResource( 7 )
+animation = "damage"
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+position = Vector2( -0.264862, 1.05946 )
+shape = SubResource( 8 )
+
+[node name="Hitbox" type="Area2D" parent="."]
+
+[node name="Collision" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource( 9 )
+
+[node name="DamagedSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 3 )

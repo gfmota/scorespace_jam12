@@ -20,12 +20,17 @@ onready var sprite : AnimatedSprite = $Sprite
 onready var tween : Tween = $Tween
 
 func _ready():
+# warning-ignore:return_value_discarded
 	hitbox.connect("body_entered", self, "on_hitbox_body_entered")
+# warning-ignore:return_value_discarded
 	knockback_timer.connect("timeout", self, "on_knockback_ended")
 	
+# warning-ignore:return_value_discarded
 	tween.interpolate_property(energies_node, "rotation_degrees", 0, 360, 2)
 	for energy in energies:
+# warning-ignore:return_value_discarded
 		tween.interpolate_property(energy, "rotation_degrees", 0, -360, 2)
+# warning-ignore:return_value_discarded
 	tween.start()
 
 func _physics_process(delta):
@@ -47,6 +52,7 @@ func _physics_process(delta):
 	speed += direction * ACCELERATION * delta
 	speed = speed.clamped(MAX_SPEED)
 	speed *= FRICTION
+# warning-ignore:return_value_discarded
 	move_and_slide(speed)
 	
 	if not invulnerable_timer.is_stopped():
@@ -86,12 +92,15 @@ func _input(event):
 
 func on_hitbox_body_entered(body):
 	if invulnerable_timer.is_stopped() and body is Enemy:
-		emit_signal("damaged")
-		knockback_dir = global_position - body.global_position
-		knockback_timer.start()
-		invulnerable_timer.start()
-		sprite.play("damage")
-		damaged_sfx.play()
+		damage(body)
+
+func damage(body):
+	emit_signal("damaged")
+	knockback_dir = global_position - body.global_position
+	knockback_timer.start()
+	invulnerable_timer.start()
+	sprite.play("damage")
+	damaged_sfx.play()
 
 func on_knockback_ended():
 	if get_parent().health == 0:

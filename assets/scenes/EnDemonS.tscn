@@ -54,7 +54,6 @@ script = ExtResource( 2 )
 health = 5
 size = 1
 speed = 1600
-weight = 1.5
 
 [node name="Sprite" type="AnimatedSprite" parent="."]
 position = Vector2( 0.210228, -0.0229759 )

@@ -49,11 +49,6 @@ margin_top = 140.0
 margin_right = 868.0
 margin_bottom = 480.0
 custom_fonts/font = SubResource( 2 )
-text = "1. MMM 8888888888
-2. ILE 
-3. LAR 0050
-4. IVO 0030
-5. REI 0010"
 align = 1
 valign = 1
 __meta__ = {
