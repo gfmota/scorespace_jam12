@@ -17,8 +17,8 @@ func _ready():
 	}
 	var data
 	var file = File.new()
-	if file.file_exists("user://save.dat"):
-		file.open("user://save.dat", File.READ)
+	if file.file_exists("user://rank.dat"):
+		file.open("user://rank.dat", File.READ)
 		data = file.get_var()
 		file.close()
 		for ind in range(0, 5):
@@ -29,7 +29,7 @@ func _ready():
 				data["name" + str(5 - ind)] = player_data["name"]
 				data["points" + str(5 - ind)] = player_data["points"]
 		
-		file.open("user://save.dat", File.WRITE)
+		file.open("user://rank.dat", File.WRITE)
 		file.store_var(data)
 		file.store_var(data)
 	else:
@@ -45,10 +45,12 @@ func _ready():
 			"name5" : "xxx",
 			"points5" : 0,
 		}
-		file.open("user://save.dat", File.WRITE)
+		file.open("user://rank.dat", File.WRITE)
 		file.store_var(data)
 	file.close()
 	rank.text = "1. " + data["name1"].to_upper() + " - " + str(data["points1"]).pad_zeros(10) + "\n2. " + data["name2"].to_upper() + " - " + str(data["points2"]).pad_zeros(10) + "\n3. " + data["name3"].to_upper() + " - " + str(data["points3"]).pad_zeros(10) + "\n4. " + data["name4"].to_upper() + " - " + str(data["points4"]).pad_zeros(10) + "\n5. " + data["name5"].to_upper() + " - " + str(data["points5"]).pad_zeros(10)
+	Global.player_name = "XXX"
+	Global.player_score = 0
 
 func on_menu_btn_pressed():
 	fade.fade_out()
